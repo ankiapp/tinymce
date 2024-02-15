@@ -246,7 +246,9 @@ const backspaceDeleteIntoListCaret = (editor: Editor, isForward: boolean): boole
       editor.undoManager.transact(() => {
         const parentNode = otherLi.parentNode as HTMLElement;
         removeBlock(dom, block, root);
-        ToggleList.mergeWithAdjacentLists(dom, parentNode);
+        if (otherLi.parentNode) {
+          ToggleList.mergeWithAdjacentLists(dom, parentNode);
+        }
         editor.selection.select(otherLi, true);
         editor.selection.collapse(isForward);
       });
