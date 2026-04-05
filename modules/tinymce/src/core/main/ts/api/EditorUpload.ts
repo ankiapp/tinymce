@@ -272,6 +272,9 @@ const EditorUpload = (editor: Editor): EditorUpload => {
         // RTC is set up so that image sources are only ever blob
       } else {
         Arr.each(filteredResult, (resultItem) => {
+          if (!resultItem.blobInfo) {
+            return;
+          }
           replaceUrlInUndoStack(resultItem.image.src, resultItem.blobInfo.blobUri());
           resultItem.image.src = resultItem.blobInfo.blobUri();
           resultItem.image.removeAttribute('data-mce-src');

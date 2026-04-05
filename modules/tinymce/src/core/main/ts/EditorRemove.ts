@@ -48,7 +48,8 @@ const remove = (editor: Editor): void => {
     const body = editor.getBody();
     const element = editor.getElement();
     if (body) {
-      editor.save({ is_removing: true });
+      // This was causing `Error: Node cannot be null or undefined` in Firefox upon closing the Card modal.
+      // editor.save({ is_removing: true });
     }
     editor.removed = true;
     editor.unbindAllNativeEvents();
